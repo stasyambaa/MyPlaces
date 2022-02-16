@@ -245,10 +245,14 @@
                     <navigationItem key="navigationItem" title="New Place" id="KN1-b3-BpI">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="yjH-ip-SYA">
                             <connections>
-                                <segue destination="QQb-ff-S66" kind="unwind" unwindAction="cancelAction:" id="WIW-b7-fDL"/>
+                                <action selector="cancelAction:" destination="Azv-Ov-Rvk" id="rYp-lP-1o6"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="age-Sf-cPx"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="age-Sf-cPx">
+                            <connections>
+                                <segue destination="QQb-ff-S66" kind="unwind" unwindAction="unwindSegue:" id="HIR-E2-j1o"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="placeImage" destination="8Dj-w2-apv" id="rKS-Qe-tUE"/>

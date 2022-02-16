@@ -14,7 +14,9 @@ struct Place {
     var name: String
     var location: String?
     var type: String?
+    // добавленная вручную картинка
     var image: UIImage?
+        // стартовый набор картинок по имени
     var restaurantImage: String?
     
      static let restaurantNames = ["Burger Heroes", "Kitchen", "Bonsai", "Дастархан", "Индокитай", "X.O", "Балкан Гриль", "Sherlock Holmes", "Speak Easy", "Morris Pub", "Вкусные истории", "Классик", "Love&Life", "Шок", "Бочка"]

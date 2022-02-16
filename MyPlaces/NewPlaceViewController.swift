@@ -10,12 +10,15 @@ import UIKit
 class NewPlaceViewController: UITableViewController {
 
     var newPlace: Place?
+    // менялась ли картинка при добавлении нового места
+    var imageIsChanged = false
     
     @IBOutlet weak var placeType: UITextField!
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeName: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var placeImage: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // отключение кнопки save со старту, пока мы не введем название заведения
@@ -62,8 +65,27 @@ class NewPlaceViewController: UITableViewController {
     
     
     func saveNewPlace() {
-        newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, image: placeImage.image , restaurantImage: <#T##String?#>)
+        
+        var image: UIImage?
+        
+            // если добавили новую картинку, то используем ее, если нет - то стандартную
+        if imageIsChanged {
+            image = placeImage.image
+        } else {
+            image = UIImage(named: "imagePlaceholder")
+        }
+        
+        newPlace = Place(name: placeName.text!,
+                         location: placeLocation.text,
+                         type: placeType.text,
+                         image: image,
+                         restaurantImage: nil)
     }
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 
@@ -115,6 +137,7 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
         placeImage.contentMode = .scaleAspectFill
         //обрезка по границе imageView
         placeImage.clipsToBounds = true
+        imageIsChanged = true
         dismiss(animated: true)
     }
 }
