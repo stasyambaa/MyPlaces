@@ -9,13 +9,21 @@ import UIKit
 
 class NewPlaceViewController: UITableViewController {
 
-    @IBOutlet weak var imageOfPlace: UIImageView!
+    var newPlace: Place?
+    
+    @IBOutlet weak var placeType: UITextField!
+    @IBOutlet weak var placeLocation: UITextField!
+    @IBOutlet weak var placeName: UITextField!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var placeImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        // отключение кнопки save со старту, пока мы не введем название заведения
+        saveButton.isEnabled = false
         // убрать линии ниже 4 секций
         tableView.tableFooterView = UIView()
+        // метод для наблюдением за изменением текста в строке placeName
+        placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
@@ -50,7 +58,19 @@ class NewPlaceViewController: UITableViewController {
             view.endEditing(true)
         }
     }
+    
+    
+    
+    func saveNewPlace() {
+        newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, image: placeImage.image , restaurantImage: <#T##String?#>)
+    }
 }
+
+
+
+
+
+
 // MARK: text field delegate
     extension NewPlaceViewController: UITextFieldDelegate {
         //  Скрываем клавиатуру по нажатию  done
@@ -58,7 +78,21 @@ class NewPlaceViewController: UITableViewController {
             textField.resignFirstResponder()
             return true
         }
+        // objc метод слежения за пустотой placeName и включением кнопки save
+        @objc func textFieldChanged() {
+            if placeName.text?.isEmpty == false {
+                saveButton.isEnabled = true
+            } else {
+                saveButton.isEnabled = false
+            }
+        }
     }
+
+
+
+
+
+
 // MARK: word with image
 extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func chooseImagePicker(source: UIImagePickerController.SourceType) {
@@ -76,11 +110,11 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
     // работа с полученным отредактированным из камеры или из галереи изображение
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // присваивание значения аутлету, editedImage - отредактированное изображение
-        imageOfPlace.image = info[.editedImage] as? UIImage
+        placeImage.image = info[.editedImage] as? UIImage
         //масштабирование под размер
-        imageOfPlace.contentMode = .scaleAspectFill
+        placeImage.contentMode = .scaleAspectFill
         //обрезка по границе imageView
-        imageOfPlace.clipsToBounds = true
+        placeImage.clipsToBounds = true
         dismiss(animated: true)
     }
 }
