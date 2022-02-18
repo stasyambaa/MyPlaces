@@ -9,7 +9,7 @@ import UIKit
 
 class NewPlaceViewController: UITableViewController {
 
-    var newPlace = Place()
+    
     // менялась ли картинка при добавлении нового места
     var imageIsChanged = false
     
@@ -21,10 +21,7 @@ class NewPlaceViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.async {
-            self.newPlace.savePlaces()
-        }
-         
+        
         // отключение кнопки save со старту, пока мы не введем название заведения
         saveButton.isEnabled = false
         // убрать линии ниже 4 секций
@@ -68,24 +65,23 @@ class NewPlaceViewController: UITableViewController {
     
     
     
-//    func saveNewPlace() {
-//
-//        var image: UIImage?
-//
-//            // если добавили новую картинку, то используем ее, если нет - то стандартную
-//        if imageIsChanged {
-//            image = placeImage.image
-//        } else {
-//            image = UIImage(named: "imagePlaceholder")
-//        }
-//
-//        newPlace = Place(name: placeName.text!,
-//                         location: placeLocation.text,
-//                         type: placeType.text,
-//                         image: image,
-//                         restaurantImage: nil)
-//    }
-//
+    func saveNewPlace() {
+
+        var image: UIImage?
+        // если добавили новую картинку, то используем ее, если нет - то стандартную
+        if imageIsChanged {
+            image = placeImage.image
+        } else {
+            image = UIImage(named: "imagePlaceholder")
+        }
+        
+        let imageData = image?.pngData()
+
+        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData)
+        
+        StorageManager.saveObject(newPlace)
+    }
+
     @IBAction func cancelAction(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
