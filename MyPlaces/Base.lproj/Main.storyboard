@@ -25,6 +25,9 @@
                                     <segment title="Data"/>
                                     <segment title="Name"/>
                                 </segments>
+                                <connections>
+                                    <action selector="sortSelection:" destination="EH7-pE-IR7" eventType="valueChanged" id="w0l-Hw-0u9"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Mjj-q0-Wyi">
                                 <rect key="frame" x="0.0" y="69" width="375" height="598"/>
@@ -108,7 +111,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Plases" largeTitleDisplayMode="never" id="3gs-VD-nE5">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="AZ" id="Fxu-7W-UHB"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="AZ" id="Fxu-7W-UHB">
+                            <connections>
+                                <action selector="reverseSorting:" destination="EH7-pE-IR7" id="35x-ic-3ya"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="62y-vL-hND">
                             <connections>
                                 <segue destination="uYc-mr-eas" kind="presentation" id="RXb-fK-LMB"/>
@@ -116,6 +123,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="reversedSortingButton" destination="Fxu-7W-UHB" id="fGb-fu-a1f"/>
+                        <outlet property="segmentedControl" destination="7Ul-9k-tCa" id="q3F-e9-bRT"/>
                         <outlet property="tableView" destination="Mjj-q0-Wyi" id="POa-qh-RBA"/>
                     </connections>
                 </viewController>

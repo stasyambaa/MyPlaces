@@ -18,6 +18,7 @@ class Place: Object {
     // добавленная вручную картинка
     @objc dynamic var imageData: Data?
         // стартовый набор картинок по имени
+    @objc dynamic var date = Date()
     
     convenience init(name: String, location: String?, type: String?, imageData: Data?) {
         self.init()
