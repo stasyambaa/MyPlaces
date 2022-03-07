@@ -25,7 +25,10 @@ class NewPlaceViewController: UITableViewController {
         // отключение кнопки save со старту, пока мы не введем название заведения
         saveButton.isEnabled = false
         // убрать линии ниже 4 секций
-        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0,
+                                                         y: 0,
+                                                         width: tableView.frame.size.width,
+                                                         height: 1))
         // метод для наблюдением за изменением текста в строке placeName
         placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         setupEditScreen()

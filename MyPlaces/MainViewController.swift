@@ -43,7 +43,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     // MARK: - Table view data source
 
-    
+    // отмена выделения ячейки после нажатия назад
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltered {
