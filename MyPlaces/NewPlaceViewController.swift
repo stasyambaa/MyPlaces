@@ -116,7 +116,9 @@ class NewPlaceViewController: UITableViewController {
     
     private func setupNavigationBar() {
         if let topItem = navigationController?.navigationBar.topItem {
-            topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+            topItem.backBarButtonItem = UIBarButtonItem(title: "",
+                                style: .plain,
+                                target: nil, action: nil)
         }
         navigationItem.leftBarButtonItem = nil
         title = currentPlace?.name
@@ -128,11 +130,6 @@ class NewPlaceViewController: UITableViewController {
     }
     
 }
-
-
-
-
-
 
 // MARK: text field delegate
     extension NewPlaceViewController: UITextFieldDelegate {
