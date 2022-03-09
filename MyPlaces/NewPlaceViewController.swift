@@ -9,10 +9,11 @@ import UIKit
 
 class NewPlaceViewController: UITableViewController {
 
-    var currentPlace: Place?
+    var currentPlace: Place!
     // менялась ли картинка при добавлении нового места
     var imageIsChanged = false
     
+    @IBOutlet weak var ratingControl: RatingControl!
     @IBOutlet weak var placeType: UITextField!
     @IBOutlet weak var placeLocation: UITextField!
     @IBOutlet weak var placeName: UITextField!
@@ -81,7 +82,7 @@ class NewPlaceViewController: UITableViewController {
         
         let imageData = image?.pngData()
 
-        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData)
+        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData, rating: Double(ratingControl.rating))
         
         if currentPlace != nil {
             try! realm.write {
@@ -89,6 +90,7 @@ class NewPlaceViewController: UITableViewController {
                 currentPlace?.location = newPlace.location
                 currentPlace?.type = newPlace.type
                 currentPlace?.imageData = newPlace.imageData
+                currentPlace?.rating = newPlace.rating
             }
         } else {
             StorageManager.saveObject(newPlace)
@@ -108,6 +110,7 @@ class NewPlaceViewController: UITableViewController {
             placeLocation.text = currentPlace?.location
             placeImage.image = image
             placeImage.contentMode = .scaleAspectFill
+            ratingControl.rating = Int(currentPlace.rating)
         }
     }
     
